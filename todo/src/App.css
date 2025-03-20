@@ -1,0 +1,202 @@
+/* Enhanced App.css */
+:root {
+  --primary-color: #4A90E2;
+  --secondary-color: #8BB9C5;
+  --accent-color: #4CAF50;
+  --danger-color: #E74C3C;
+  --background-light: #F5F5F5;
+  --background-dark: #112233;
+  --text-light: #FFFFFF;
+  --text-dark: #333333;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+/* App Container */
+.App {
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px;
+  background-color: #f4f6f6
+}
+
+/* Navigation Bar */
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 20px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 50px;
+}
+
+.NavTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.UserMenu {
+  display: flex;
+  align-items: center;
+}
+
+.UserBadge {
+  font-size: 14px;
+  margin-right: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.MenuButton {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+/* Menu */
+.MobileMenu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  z-index: 100;
+  flex-direction: column;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.MobileMenuText {
+  padding: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background 0.3s;
+}
+
+/* Auth Page */
+.AuthContainer {
+  margin-top:30vh;
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.AuthTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.LoginInput {
+  background: #3d3b3b;
+  border: 2px solid white;   /* Add visibility */
+  flex: 1;
+  padding: 16px;
+  margin-bottom:10px;
+  border-radius: 8px;
+  font-size: 16px;
+  /* Ensure text is visible */
+}
+
+/* Button Styling */
+.LoginButton {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  background: #076ab5;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  color: white;
+  text-align: center;
+  border: none;
+}
+
+/* Todo Section */
+.TodoInputSection {
+  display: flex;
+  margin-top: 20px;
+  gap:10px;
+  padding: 12px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px #1717171f;
+}
+
+.TodoInput {
+  flex: 1;
+  padding: 16px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.AddButton {
+  background: #076ab5;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+
+/* Todo List */
+.TodoList {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.TodoItem {
+  background-color: #6d666614;
+  border-radius: var(--border-radius);
+  margin-top: 20px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.TodoText {
+  font-size: 16px;
+  color: #2d3436;
+}
+
+.DeleteButton {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* About Section */
+.AboutTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.AboutText {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.ErrorText {
+  font-size: 16px;
+  color: #ffffff;
+}
