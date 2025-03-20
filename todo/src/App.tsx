@@ -13,6 +13,9 @@ export function App() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editTodo, setEditTodo] = useState('');
+
   const handleAddTodo = useCallback(() => {
     'background only';
     if (newTodo.trim()) {
@@ -55,6 +58,21 @@ export function App() {
     setUsername('');
     setPassword('');
   }, []);
+
+  const handleEditTodo = useCallback((index: number) => {
+    setEditIndex(index);
+    setEditTodo(todos[index]);
+  }, [todos]);
+
+  const handleSaveTodo = useCallback(() => {
+    if (editTodo.trim()) {
+      const updatedTodos = [...todos];
+      updatedTodos[editIndex!] = editTodo.trim();
+      setTodos(updatedTodos);
+      setEditIndex(null);
+      setEditTodo('');
+    }
+  }, [editTodo, todos, editIndex]);
 
   if (!isAuthenticated) {
     return (
@@ -142,8 +160,23 @@ export function App() {
           <view className="TodoList">
               {todos.map((todo, index) => (
                 <view key={index} className="TodoItem">
-                  <text className='TodoText'>{todo}</text>
-                  <text className="DeleteButton" bindtap={() => handleDeleteTodo(index)}>❌</text>
+                    {editIndex === index ? (
+                      <view className="UpdateBox">
+                        <input
+                          className="UpdateInput"
+                          value={editTodo}
+                          // @ts-ignore
+                          bindinput={(e) => setEditTodo(e.detail.value)}
+                          placeholder="Update todo"
+                        />
+                        <text className="UpdateButton" bindtap={handleSaveTodo}>Update</text>
+                      </view>
+                    ) : (
+                      <>
+                        <text className="TodoText" bindtap={() => handleEditTodo(index)}>{todo}</text>
+                        <text className="DeleteButton" bindtap={() => handleDeleteTodo(index)}>❌</text>
+                      </>
+                    )}
                 </view>
               ))}
           </view>
