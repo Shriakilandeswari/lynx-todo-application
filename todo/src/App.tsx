@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from '@lynx-js/react';
 import './App.css';
 
 export function App() {
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<{ text: string; completed: boolean }[]>([]);
   const [newTodo, setNewTodo] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentView, setCurrentView] = useState('home');
@@ -19,7 +19,7 @@ export function App() {
   const handleAddTodo = useCallback(() => {
     'background only';
     if (newTodo.trim()) {
-      setTodos([...todos, newTodo.trim()]);
+      setTodos([...todos, {text: newTodo.trim(), completed: false}]);
       setNewTodo('');
     }
   }, [newTodo, todos]);
@@ -61,18 +61,24 @@ export function App() {
 
   const handleEditTodo = useCallback((index: number) => {
     setEditIndex(index);
-    setEditTodo(todos[index]);
+    setEditTodo(todos[index].text);
   }, [todos]);
 
   const handleSaveTodo = useCallback(() => {
     if (editTodo.trim()) {
       const updatedTodos = [...todos];
-      updatedTodos[editIndex!] = editTodo.trim();
+      updatedTodos[editIndex!].text = editTodo.trim();
       setTodos(updatedTodos);
       setEditIndex(null);
       setEditTodo('');
     }
   }, [editTodo, todos, editIndex]);
+
+  const toggleCompletion = useCallback((index: number) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
+  }, [todos]);
 
   if (!isAuthenticated) {
     return (
@@ -159,7 +165,7 @@ export function App() {
 
           <view className="TodoList">
               {todos.map((todo, index) => (
-                <view key={index} className="TodoItem">
+                  <view key={index} className="TodoItem">
                     {editIndex === index ? (
                       <view className="UpdateBox">
                         <input
@@ -173,11 +179,34 @@ export function App() {
                       </view>
                     ) : (
                       <>
-                        <text className="TodoText" bindtap={() => handleEditTodo(index)}>{todo}</text>
+                        <text
+                          className="CheckCircle"
+                          style={{
+                            border: '1px solid rgb(139, 185, 197)',
+                            borderRadius: '50%',
+                            width: '20px',
+                            height: '20px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            background: todo.completed ? '#4CAF50' : 'transparent',
+                          }}
+                          bindtap={() => toggleCompletion(index)}
+                        />
+                        <text 
+                        className="TodoText"
+                        bindtap={() => !todo.completed && handleEditTodo(index)}
+                        style={{ 
+                          textDecoration: todo.completed ? 'line-through' : 'none',
+                          color: todo.completed ? '#888' : '#000'
+                        }}
+                        >{todo.text}
+
+                        </text>
                         <text className="DeleteButton" bindtap={() => handleDeleteTodo(index)}>❌</text>
                       </>
                     )}
-                </view>
+                  </view>
               ))}
           </view>
         </view>
