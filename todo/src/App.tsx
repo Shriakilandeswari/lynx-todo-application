@@ -86,7 +86,7 @@ export function App() {
         <view className="Content">
         <view className="AuthContainer">
           <text className="AuthTitle">Login to Lynx Todoss</text>
-
+          <view className="AuthSection">
           <input
             className="LoginInput"
             value={username}
@@ -115,6 +115,7 @@ export function App() {
               borderRadius: '4px'
             }}
           />
+          </view>
           {errorMessage && <text className="ErrorText">{errorMessage}</text>}
 
           <text className="LoginButton" bindtap={handleLogin}>Login</text>
